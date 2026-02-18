@@ -15,9 +15,3 @@
 1. Open in Android Studio
 2. Gradle sync
 3. Run `app`
-
-## Next steps (easy wins)
-- Transactions list screen (filters + search)
-- Budget limits per category
-- CSV export/import
-- More unit tests
