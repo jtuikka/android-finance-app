@@ -32,7 +32,7 @@ class HomeViewModel @Inject constructor(
             combine(
                 totalsUseCase(mr.fromEpochDay, mr.toEpochDay),
                 totalsUseCase(prevMr.fromEpochDay, prevMr.toEpochDay),
-                topCatsUseCase(mr.fromEpochDay, mr.toEpochDay, limit = 3),
+                topCatsUseCase(mr.fromEpochDay, mr.toEpochDay, limit = Int.MAX_VALUE),
                 repo.observeCategories()
             ) { totalsNow, totalsPrev, topRows, cats ->
 
@@ -48,7 +48,6 @@ class HomeViewModel @Inject constructor(
                     incomeCents = totalsNow.incomeCents,
                     expenseCents = totalsNow.expenseCents,
 
-                    // 🔹 NEW: previous month totals
                     prevIncomeCents = totalsPrev.incomeCents,
                     prevExpenseCents = totalsPrev.expenseCents,
 
