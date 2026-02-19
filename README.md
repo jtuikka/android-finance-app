@@ -95,7 +95,4 @@ app/
 2. Gradle sync
 3. Run `app`
 
-**Future improvements**
--Add reamining screens
--Ability to remove and edit data
--Visual upgrades
+
