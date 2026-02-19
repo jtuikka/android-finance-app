@@ -7,6 +7,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.navigation.compose.rememberNavController
 import com.jeture.budget.ui.navigation.AppNavGraph
+import com.jeture.budget.ui.navigation.RootScaffold
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -15,10 +16,8 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             MaterialTheme {
-                Surface {
-                    val nav = rememberNavController()
-                    AppNavGraph(nav)
-                }
+                val nav = rememberNavController()
+                RootScaffold(nav)
             }
         }
     }
