@@ -1,6 +1,8 @@
 package com.jeture.budget.ui.navigation
 
 import androidx.compose.material3.*
+import androidx.compose.material3.AlertDialogDefaults.containerColor
+import androidx.compose.material3.ListItemDefaults.contentColor
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.navigation.NavHostController
@@ -17,7 +19,10 @@ fun RootScaffold(nav: NavHostController) {
     Scaffold(
         bottomBar = {
             if (showBottomBar) {
-                NavigationBar {
+                NavigationBar(
+                    containerColor = MaterialTheme.colorScheme.primaryContainer,
+                    contentColor = MaterialTheme.colorScheme.onPrimaryContainer
+                ) {
                     bottomTabs.forEach { tab ->
                         val selected = currentRoute == tab.route
                         NavigationBarItem(

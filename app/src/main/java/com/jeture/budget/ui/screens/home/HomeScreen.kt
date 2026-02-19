@@ -20,14 +20,14 @@ import androidx.compose.ui.Alignment
 import com.jeture.budget.domain.model.Category
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.text.style.TextAlign
-
+import java.time.format.TextStyle
+import java.util.Locale
 
 data class PieSlice(
     val label: String,
     val value: Float,
     val color: Color
 )
-
 
 private fun formatEur(cents: Long): String = "€%.2f".format(cents / 100.0)
 
@@ -170,6 +170,11 @@ fun HomeScreen(
 ) {
     val s by vm.state.collectAsState()
 
+    val monthName = s.month.yearMonth.month.getDisplayName(
+        TextStyle.FULL,
+        Locale.getDefault()
+    )
+
     Scaffold(
         topBar = {
             TopAppBar(
@@ -179,15 +184,35 @@ fun HomeScreen(
                     titleContentColor = MaterialTheme.colorScheme.onPrimaryContainer
                 ),
                 actions = {
-                    TextButton(onClick = vm::prevMonth) { Text("Prev") }
-                    TextButton(onClick = vm::nextMonth) { Text("Next") }
+                    TextButton(onClick = vm::prevMonth,
+                        Modifier.padding(6.dp),
+                        colors = ButtonDefaults.textButtonColors(
+                        containerColor =  MaterialTheme.colorScheme.onPrimaryContainer
+                        )
+                    )
+                    { Text("Prev") }
+                    TextButton(onClick = vm::nextMonth,
+                        Modifier.padding(6.dp),
+                        colors = ButtonDefaults.textButtonColors(
+                            containerColor =  MaterialTheme.colorScheme.onPrimaryContainer
+                        )
+                    )
+                    { Text("Next") }
                 }
             )
         },
     ) { padding ->
         Column(Modifier.padding(padding).padding(16.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
+            Text(
+                modifier = Modifier.padding(8.dp),
+                text = "Finances in $monthName",
+                style = MaterialTheme.typography.titleLarge
+            )
             Card(
-                modifier = Modifier.fillMaxWidth()
+                modifier = Modifier.fillMaxWidth(),
+                colors =  CardDefaults.cardColors(
+                    containerColor = MaterialTheme.colorScheme.secondaryContainer
+                )
             ) {
                 Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
                     SummaryRow(
@@ -225,7 +250,11 @@ fun HomeScreen(
             }
 
             Card(
-                modifier = Modifier.fillMaxWidth()
+                modifier = Modifier.fillMaxWidth(),
+                colors =  CardDefaults.cardColors(
+                    containerColor = MaterialTheme.colorScheme.secondaryContainer
+                )
+
             ) {
                 Column(Modifier
                         .fillMaxWidth()
@@ -242,7 +271,10 @@ fun HomeScreen(
                 }
             }
             Card(
-                modifier = Modifier.fillMaxWidth()
+                modifier = Modifier.fillMaxWidth(),
+                colors =  CardDefaults.cardColors(
+                    containerColor = MaterialTheme.colorScheme.secondaryContainer
+                )
             ) {
                 Column(
                     Modifier.padding(16.dp),
