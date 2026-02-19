@@ -22,6 +22,8 @@ import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.text.style.TextAlign
 import java.time.format.TextStyle
 import java.util.Locale
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 
 data class PieSlice(
     val label: String,
@@ -170,6 +172,8 @@ fun HomeScreen(
 ) {
     val s by vm.state.collectAsState()
 
+    val scrollState = rememberScrollState()
+
     val monthName = s.month.yearMonth.month.getDisplayName(
         TextStyle.FULL,
         Locale.getDefault()
@@ -202,7 +206,13 @@ fun HomeScreen(
             )
         },
     ) { padding ->
-        Column(Modifier.padding(padding).padding(16.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
+        Column(
+            modifier = Modifier
+                .padding(padding)
+                .padding(16.dp)
+                .verticalScroll(scrollState),
+            verticalArrangement = Arrangement.spacedBy(12.dp)
+        ) {
             Text(
                 modifier = Modifier.padding(8.dp),
                 text = "Finances in $monthName",
@@ -271,7 +281,9 @@ fun HomeScreen(
                 }
             }
             Card(
-                modifier = Modifier.fillMaxWidth(),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(bottom = 96.dp),
                 colors =  CardDefaults.cardColors(
                     containerColor = MaterialTheme.colorScheme.secondaryContainer
                 )
